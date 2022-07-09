@@ -21,13 +21,6 @@ class PequenosMultiplos:
 		component = html.Div([
 			html.Div([
 				dcc.Dropdown(
-					id=self.state_id,
-					options=list(self.dataset.get_available_dates()),
-					value=self.date,
-				)
-			]),
-			html.Div([
-				dcc.Dropdown(
 					id=self.state_id + '-columns',
 					options=list(self.dataset.get().columns),
 					value=self.dataset.get().columns[0],
@@ -38,12 +31,11 @@ class PequenosMultiplos:
 
 		@app.callback(
 			Output(self.field + '1', 'figure'),
-			[Input(self.state_id, 'value'),
+			[Input('date-selection', 'value'),
 			Input(self.state_id + '-columns', 'value')]
 		)
-		def update(date, column):
-			print(date, column)
-			self.date = date
+		def update(date_index, column):
+			self.date = self.dataset.get_date_by_index(date_index)
 			
 			# fig = px.histogram(self.dataset.get_by_date(self.date), x=column)
 			# fig.update_layout(
