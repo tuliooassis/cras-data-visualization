@@ -37,7 +37,7 @@ class Dataset:
 		return self.data
 	
 	def get_histogram_cols(self):
-		cols_to_use = ['PARENTESCO_RF', 'IDADE', 'SEXO', 'BOLSA_FAMILIA',
+		cols_to_use = ['PARENTESCO_RF', 'IDADE', 'SEXO', 'AUXILIO_BRASIL',
        'POP_RUA', 'GRAU_INSTRUCAO', 'COR_RACA',
        'FAIXA_RENDA_FAMILIAR_PER_CAPITA',
        'CRAS', 'REGIONAL', 'FAIXA_DESATUALICACAO_CADASTRAL']
