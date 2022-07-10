@@ -10,7 +10,10 @@ class Dataset:
 		for filename in ['./Data/CRAS/Pessoas/data_set_pessoas_cadunico_042022.csv']:
 			print('Reading ', filename)
 
-			data = pd.read_csv(filename, sep=';') #, encoding='latin-1')
+			# Read column names from file
+			cols = list(pd.read_csv(filename, sep=';', nrows =1))
+			print(cols)
+			data = pd.read_csv(filename, sep=';', usecols =[i for i in cols if i != 'DATA_NASCIMENTO']) #, encoding='latin-1')
 
 			if firstTime:
 				allMonths = data
