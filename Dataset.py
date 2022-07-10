@@ -12,7 +12,6 @@ class Dataset:
 
 			# Read column names from file
 			cols = list(pd.read_csv(filename, sep=';', nrows =1))
-			print(cols)
 			data = pd.read_csv(filename, sep=';', usecols =[i for i in cols if i != 'DATA_NASCIMENTO']) #, encoding='latin-1')
 
 			if firstTime:
@@ -30,8 +29,6 @@ class Dataset:
 
 		## Remove unused collumns
 		#self.data.drop(columns=['VAL_REMUNERACAO_MES_PASSADO'], inplace=True)
-
-		print(self.data.columns)
 
 	def get(self):
 		return self.data

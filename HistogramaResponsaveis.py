@@ -11,14 +11,17 @@ import plotly.graph_objects as go
 class HistogramaResponsaveis:
 	def __init__(self, dataset):
 		self.dataset = dataset
+		self.options = ['IDADE', 'SEXO', 'AUXILIO_BRASIL', 'GRAU_INSTRUCAO',
+			'COR_RACA', 'FAIXA_RENDA_FAMILIAR_PER_CAPITA', 'REGIONAL',
+			'FAIXA_DESATUALICACAO_CADASTRAL']
 
 	def get(self, app):
 		component = html.Div([
 			html.Div([
 				dcc.Dropdown(
 					id='histograma-responsaveis-columns',
-					options=list(self.dataset.get_histogram_cols().columns),
-					value=self.dataset.get_histogram_cols().columns[0],
+					options=self.options,
+					value=self.options[0],
 				)
 			]),
 			dcc.Graph(id='histograma-responsaveis')
