@@ -10,7 +10,7 @@ class Dataset:
 		for filename in ['./Data/CRAS/Pessoas/data_set_pessoas_cadunico_062021.csv', './Data/CRAS/Pessoas/data_set_pessoas_cadunico_052021.csv']:
 			print('Reading ', filename)
 
-			data = pd.read_csv(filename, sep=';', encoding='latin-1')
+			data = pd.read_csv(filename, sep=';') #, encoding='latin-1')
 
 			if firstTime:
 				allMonths = data
@@ -25,6 +25,9 @@ class Dataset:
 		self.data["MES_ANO_REFERENCIA"] = pd.to_datetime(self.data["MES_ANO_REFERENCIA"], format='%d/%m/%Y')
 		self.data["MES_ANO_REFERENCIA"] = self.data["MES_ANO_REFERENCIA"].dt.strftime('%Y-%m')
 
+		## Remove unused collumns
+		#self.data.drop(columns=['VAL_REMUNERACAO_MES_PASSADO'], inplace=True)
+
 		if add_codes:
 			self.__add_attributes_code()
 
@@ -32,6 +35,13 @@ class Dataset:
 
 	def get(self):
 		return self.data
+	
+	def get_histogram_cols(self):
+		cols_to_use = ['PARENTESCO_RF', 'IDADE', 'SEXO', 'BOLSA_FAMILIA',
+       'POP_RUA', 'GRAU_INSTRUCAO', 'COR_RACA',
+       'FAIXA_RENDA_FAMILIAR_PER_CAPITA',
+       'CRAS', 'REGIONAL', 'FAIXA_DESATUALICACAO_CADASTRAL']
+		return self.data[cols_to_use]
 
 	def get_by_date(self, date):
 		return self.data[self.data['MES_ANO_REFERENCIA'] == date]
