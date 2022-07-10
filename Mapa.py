@@ -9,7 +9,6 @@ import plotly.graph_objects as go
 class Mapa:
 	def __init__(self, dataset):
 		self.dataset = dataset
-		self.date = '2021-06'
 
 		self.crasGeolocation = {
 			'CRAS PETROPOLIS': (-20.01266937619392, -44.02714971130215), 
@@ -68,26 +67,20 @@ class Mapa:
 		self.crasFamiliesWithGeo = self.crasFamiliesWithGeo.drop(self.crasFamiliesWithGeo[self.crasFamiliesWithGeo['CRAS'] == 'ENDERECO FORA AREA CRAS'].index)
 		self.crasFamiliesWithGeo = self.crasFamiliesWithGeo.drop(self.crasFamiliesWithGeo[self.crasFamiliesWithGeo['REGIONAL'] == 'ENDERECO NAO GEORREFERENCIADO'].index)
 		self.crasFamiliesWithGeo = self.crasFamiliesWithGeo.drop(self.crasFamiliesWithGeo[self.crasFamiliesWithGeo['REGIONAL'] == 'Endereco FORA Region'].index)
-
-		print(self.crasFamiliesWithGeo.head(2))
-
+	
+	
 	def get(self, app):
 		component = html.Div([
-			dcc.Graph(id='mapa')
-		])
-
-		@app.callback(
-			Output('mapa', 'figure'),
-		)
-		def update():
-			fig = px.scatter_geo(self.crasFamiliesWithGeo,
+			dcc.Graph(
+				id='mapa',
+				figure=px.scatter_geo(self.crasFamiliesWithGeo,
 					lat="lat", lon="lon",
 					color="REGIONAL",
 					hover_name="CRAS", size="PARENTESCO_RF",
 					projection="natural earth", scope="south america",
-					center={ 'lat': -19.845983155301074, 'lon': -43.91473424758369})
-			
-			return fig
-
+					center={ 'lat': -19.845983155301074, 'lon': -43.91473424758369}
+				)
+			)
+		])
 
 		return component
