@@ -7,7 +7,7 @@ class Dataset:
 		firstTime = True
 
 		# for filename in glob.glob("./Data/CRAS/Pessoas/*.csv"):
-		for filename in ['./Data/CRAS/Pessoas/data_set_pessoas_cadunico_062021.csv', './Data/CRAS/Pessoas/data_set_pessoas_cadunico_052021.csv']:
+		for filename in ['./Data/CRAS/Pessoas/data_set_pessoas_cadunico_042022.csv']:
 			print('Reading ', filename)
 
 			data = pd.read_csv(filename, sep=';') #, encoding='latin-1')
