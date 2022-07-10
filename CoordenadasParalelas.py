@@ -11,6 +11,36 @@ class CoordenadasParalelas:
 		self.dataset = dataset
 		self.date = '2021-06'
 
+		self.data = self.dataset.get().copy()
+
+		self.data.SEXO = pd.Categorical(self.data.SEXO)
+		self.data['SEXO_CAT'] = self.data.SEXO.cat.codes
+
+		self.data.PARENTESCO_RF = pd.Categorical(self.data.PARENTESCO_RF)
+		self.data['PARENTESCO_RF_CAT'] = self.data.PARENTESCO_RF.cat.codes
+
+		self.data.AUXILIO_BRASIL = pd.Categorical(self.data.AUXILIO_BRASIL)
+		self.data['AUXILIO_BRASIL_CAT'] = self.data.AUXILIO_BRASIL.cat.codes
+
+		self.data.GRAU_INSTRUCAO = pd.Categorical(self.data.GRAU_INSTRUCAO)
+		self.data['GRAU_INSTRUCAO_CAT'] = self.data.GRAU_INSTRUCAO.cat.codes
+
+		self.data.COR_RACA = pd.Categorical(self.data.COR_RACA)
+		self.data['COR_RACA_CAT'] = self.data.COR_RACA.cat.codes
+
+		self.data.FAIXA_RENDA_FAMILIAR_PER_CAPITA = pd.Categorical(self.data.FAIXA_RENDA_FAMILIAR_PER_CAPITA)
+		self.data['FAIXA_RENDA_FAMILIAR_PER_CAPITA_CAT'] = self.data.FAIXA_RENDA_FAMILIAR_PER_CAPITA.cat.codes
+
+		self.data.CRAS = pd.Categorical(self.data.CRAS)
+		self.data['CRAS_CAT'] = self.data.CRAS.cat.codes
+
+		self.data.REGIONAL = pd.Categorical(self.data.REGIONAL)
+		self.data['REGIONAL_CAT'] = self.data.REGIONAL.cat.codes
+
+		self.data.FAIXA_DESATUALICACAO_CADASTRAL = pd.Categorical(self.data.FAIXA_DESATUALICACAO_CADASTRAL)
+		self.data['FAIXA_DESATUALICACAO_CADASTRAL_CAT'] = self.data.FAIXA_DESATUALICACAO_CADASTRAL.cat.codes
+
+
 	def get(self, app):
 		component = html.Div([
 			dcc.Graph(id='coordenadas-paralelas')
@@ -22,7 +52,7 @@ class CoordenadasParalelas:
 		)
 		def update(date_index):
 			self.date = self.dataset.get_date_by_index(date_index)
-			df = self.dataset.get_by_date(self.date)
+			df = self.data[self.data['MES_ANO_REFERENCIA'] == self.date]
 
 			fig = go.Figure(data=
 				go.Parcoords(
@@ -41,9 +71,9 @@ class CoordenadasParalelas:
 							ticktext = df['PARENTESCO_RF'].unique(),
 							label = 'Parentesco', values = df['PARENTESCO_RF_CAT']),
 
-						# dict(tickvals = [*range(len(df['AUXILIO_BRASIL_CAT'].unique()))],
-						# 	ticktext = df['AUXILIO_BRASIL'].unique(),
-						# 	label = 'Auxilio Brasil', values = df['AUXILIO_BRASIL_CAT']),
+						dict(tickvals = [*range(len(df['AUXILIO_BRASIL_CAT'].unique()))],
+							ticktext = df['AUXILIO_BRASIL'].unique(),
+							label = 'Auxilio Brasil', values = df['AUXILIO_BRASIL_CAT']),
 
 						dict(tickvals = [*range(len(df['GRAU_INSTRUCAO_CAT'].unique()))],
 							ticktext = df['GRAU_INSTRUCAO'].unique(),
@@ -57,9 +87,9 @@ class CoordenadasParalelas:
 							ticktext = df['FAIXA_RENDA_FAMILIAR_PER_CAPITA'].unique(),
 							label = 'Renda per capita', values = df['FAIXA_RENDA_FAMILIAR_PER_CAPITA_CAT']),
 
-						# dict(tickvals = [*range(len(df['CRAS_CAT'].unique()))],
-						#	  ticktext = df['CRAS'].unique(),
-						#	  label = 'CRAS', values = df['CRAS_CAT']),
+						dict(tickvals = [*range(len(df['CRAS_CAT'].unique()))],
+							  ticktext = df['CRAS'].unique(),
+							  label = 'CRAS', values = df['CRAS_CAT']),
 
 						dict(tickvals = [*range(len(df['REGIONAL_CAT'].unique()))],
 							ticktext = df['REGIONAL'].unique(),

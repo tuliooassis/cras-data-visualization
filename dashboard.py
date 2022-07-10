@@ -12,7 +12,6 @@ app = Dash(__name__)
 server = app.server
 
 dataset = Dataset()
-# dataset_with_codes = Dataset(add_codes=True)
 
 graphs = html.Div([
 	html.Div([
@@ -31,12 +30,12 @@ graphs = html.Div([
 			style={'width': '100%'}),
 	]),
 	html.Div([
-		# html.Div(children=[
-		# 	sd_material_ui.Paper([
-		# 		CoordenadasParalelas(dataset_with_codes).get(app)
-		# 	])
-		# ],
-		# 	style={'flex': 3, 'flex-basis': '100%'}),
+		html.Div(children=[
+			sd_material_ui.Paper([
+				CoordenadasParalelas(dataset).get(app)
+			])
+		],
+			style={'flex': 3, 'flex-basis': '100%'}),
 
 		html.Div(children=[
 			sd_material_ui.Paper([
@@ -59,7 +58,7 @@ graphs = html.Div([
 				Mapa(dataset).get(app),
 			])
 		], style={'flex': 1}),
-	], style={'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'wrap'})
+	], style={'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'wrap'}),
 ])
 
 app.layout = graphs
