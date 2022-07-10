@@ -9,6 +9,7 @@ from Dataset import Dataset
 import sd_material_ui
 
 app = Dash(__name__)
+server = app.server
 
 dataset = Dataset()
 # dataset_with_codes = Dataset(add_codes=True)
