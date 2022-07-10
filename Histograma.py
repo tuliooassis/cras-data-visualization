@@ -22,7 +22,7 @@ class Histograma:
 			html.Div([
 				dcc.Dropdown(
 					id=self.state_id + '-columns',
-					options=list(self.dataset.get().columns),
+					options=list(self.dataset.get_histogram_cols().columns),
 					value=self.dataset.get().columns[0],
 				)
 			]),
