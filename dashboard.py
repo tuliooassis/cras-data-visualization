@@ -1,7 +1,9 @@
 from dash import Dash, html, dcc
+
 from CoordenadasParalelas import CoordenadasParalelas
 from PequenosMultiplos import PequenosMultiplos
 from Histograma import Histograma
+from HistogramaResponsaveis import HistogramaResponsaveis
 from Mapa import Mapa
 
 from Dataset import Dataset
@@ -59,6 +61,22 @@ graphs = html.Div([
 			])
 		], style={'flex': 1}),
 	], style={'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'wrap'}),
+	html.Div([
+		html.Div(children=[
+			sd_material_ui.Divider(),
+			html.H2('Pessoas responsáveis'),
+			sd_material_ui.Divider(),
+
+			html.Div(children=[
+				sd_material_ui.Paper([
+					HistogramaResponsaveis(dataset).get(app),
+				]),
+			],
+			style={'flex': 1}),
+		],
+			style={'width': '100%'}),
+	]),
+
 ])
 
 app.layout = graphs

@@ -38,9 +38,9 @@ class Dataset:
 	
 	def get_histogram_cols(self):
 		cols_to_use = ['PARENTESCO_RF', 'IDADE', 'SEXO', 'AUXILIO_BRASIL',
-       'POP_RUA', 'GRAU_INSTRUCAO', 'COR_RACA',
-       'FAIXA_RENDA_FAMILIAR_PER_CAPITA',
-       'CRAS', 'REGIONAL', 'FAIXA_DESATUALICACAO_CADASTRAL']
+			'GRAU_INSTRUCAO', 'COR_RACA',
+			'FAIXA_RENDA_FAMILIAR_PER_CAPITA',
+			'REGIONAL', 'FAIXA_DESATUALICACAO_CADASTRAL']
 		return self.data[cols_to_use]
 
 	def get_by_date(self, date):
@@ -51,3 +51,6 @@ class Dataset:
 
 	def get_date_by_index(self, index):
 		return self.get_available_dates()[index]
+
+	def get_responsaveis(self):
+		return self.data[self.data['PARENTESCO_RF'] == 'PESSOA RESPONSAVEL PELA UNIDADE FAMILIAR RF']
