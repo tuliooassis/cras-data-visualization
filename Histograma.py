@@ -23,7 +23,7 @@ class Histograma:
 				dcc.Dropdown(
 					id=self.state_id + '-columns',
 					options=list(self.dataset.get_histogram_cols().columns),
-					value=self.dataset.get().columns[0],
+					value=self.dataset.get_histogram_cols().columns[0],
 				)
 			]),
 			dcc.Graph(id=self.field)
@@ -39,8 +39,8 @@ class Histograma:
 			
 			fig = px.histogram(self.dataset.get_by_date(self.date), x=column)
 			fig.update_layout(
-				title_text='Distribuição de ' + self.label, # title of plot
-				xaxis_title_text=self.label, # xaxis label
+				title_text='Distribuição de ' + column.title(), # title of plot
+				#xaxis_title_text=self.label, # xaxis label
 				yaxis_title_text='Quantidade' # yaxis label
 			)
 			
