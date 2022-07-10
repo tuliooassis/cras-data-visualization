@@ -49,26 +49,17 @@ class Mapa:
 			'CRAS LAGOA': (-19.80958763224746, -44.00081485493766)
 		}
 
-		self.foraAreaCras = {
-			'CENTRO SUL': (-19.936021245215944, -43.93286569222349),
-			'VENDA NOVA': (-19.815859810884515, -43.95784110713594),
-			'NORTE': (-19.824617814660268, -43.926027894866905),
-			'LESTE': (-19.9039998627785, -43.89961664017154),
-			'PAMPULHA': (-19.851514656741127, -43.95617634399507),
-			'BARREIRO': (-19.991827027234734, -44.01253924789308),
-			'NORDESTE': (-19.857937281492493, -43.90784660292623),
-		}
+		filteredDataset = self.dataset.get().copy()[['CRAS', 'REGIONAL', 'PARENTESCO_RF']]
+		filteredDataset = filteredDataset.drop(filteredDataset[filteredDataset['REGIONAL'].isin(['ENDERECO NAO GEORREFERENCIADO', 'Endereco FORA Region'])].index)
+		filteredDataset = filteredDataset.drop(filteredDataset[filteredDataset['CRAS'].isin(['ENDERECO FORA AREA CRAS', 'ENDERECO NAO GEORREFERENCIADO'])].index)
 
-		self.crasFamiliesWithGeo = self.dataset.get().groupby(['CRAS', 'REGIONAL']).count().reset_index()
+		self.crasFamiliesWithGeo = filteredDataset.groupby(['CRAS', 'REGIONAL']).count().reset_index()
 
 		self.crasFamiliesWithGeo['lat'] = self.crasFamiliesWithGeo.apply(lambda row: self.crasGeolocation[row['CRAS']][0], axis=1)
 		self.crasFamiliesWithGeo['lon'] = self.crasFamiliesWithGeo.apply(lambda row: self.crasGeolocation[row['CRAS']][1], axis=1)
 
-		self.crasFamiliesWithGeo = self.crasFamiliesWithGeo.drop(self.crasFamiliesWithGeo[self.crasFamiliesWithGeo['CRAS'] == 'ENDERECO FORA AREA CRAS'].index)
-		self.crasFamiliesWithGeo = self.crasFamiliesWithGeo.drop(self.crasFamiliesWithGeo[self.crasFamiliesWithGeo['REGIONAL'] == 'ENDERECO NAO GEORREFERENCIADO'].index)
-		self.crasFamiliesWithGeo = self.crasFamiliesWithGeo.drop(self.crasFamiliesWithGeo[self.crasFamiliesWithGeo['REGIONAL'] == 'Endereco FORA Region'].index)
-	
-	
+		self.crasFamiliesWithGeo.rename(columns = {'PARENTESCO_RF': 'count'}, inplace = True)
+
 	def get(self, app):
 		component = html.Div([
 			dcc.Graph(
@@ -76,7 +67,7 @@ class Mapa:
 				figure=px.scatter_geo(self.crasFamiliesWithGeo,
 					lat="lat", lon="lon",
 					color="REGIONAL",
-					hover_name="CRAS", size="PARENTESCO_RF",
+					hover_name="CRAS", size="count",
 					projection="natural earth", scope="south america",
 					center={ 'lat': -19.845983155301074, 'lon': -43.91473424758369}
 				)

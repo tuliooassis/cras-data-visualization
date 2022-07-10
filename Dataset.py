@@ -59,8 +59,8 @@ class Dataset:
 		self.data.PARENTESCO_RF = pd.Categorical(self.data.PARENTESCO_RF)
 		self.data['PARENTESCO_RF_CAT'] = self.data.PARENTESCO_RF.cat.codes
 
-		# self.data.AUXILIO_BRASIL = pd.Categorical(self.data.AUXILIO_BRASIL)
-		# self.data['AUXILIO_BRASIL_CAT'] = self.data.AUXILIO_BRASIL.cat.codes
+		self.data.AUXILIO_BRASIL = pd.Categorical(self.data.AUXILIO_BRASIL)
+		self.data['AUXILIO_BRASIL_CAT'] = self.data.AUXILIO_BRASIL.cat.codes
 
 		self.data.GRAU_INSTRUCAO = pd.Categorical(self.data.GRAU_INSTRUCAO)
 		self.data['GRAU_INSTRUCAO_CAT'] = self.data.GRAU_INSTRUCAO.cat.codes
