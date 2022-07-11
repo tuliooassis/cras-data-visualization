@@ -22,7 +22,7 @@ class PequenosMultiplos:
 			html.Div([
 				dcc.Dropdown(
 					id=self.state_id + '-columns',
-					options=[col for col in list(self.dataset.get_histogram_cols().columns) if col != "REGIONAL"],
+					options=[col for col in list(self.dataset.get_histogram_cols().columns) if col not in ["REGIONAL", "SEXO"]],
 					value=self.dataset.get_histogram_cols().columns[1],
 				)
 			]),
