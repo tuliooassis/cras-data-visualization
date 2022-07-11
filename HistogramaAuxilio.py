@@ -21,7 +21,7 @@ class HistogramaAuxilio:
 				dcc.Dropdown(
 					id='histograma-auxilio-columns',
 					options=self.options,
-					value=self.options[0],
+					value=self.options[1],
 				)
 			]),
 			dcc.Graph(id='histograma-auxilio')

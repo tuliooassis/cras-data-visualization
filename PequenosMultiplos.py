@@ -23,7 +23,7 @@ class PequenosMultiplos:
 				dcc.Dropdown(
 					id=self.state_id + '-columns',
 					options=list(self.dataset.get_histogram_cols().columns),
-					value=self.dataset.get_histogram_cols().columns[0],
+					value=self.dataset.get_histogram_cols().columns[1],
 				)
 			]),
 			dcc.Graph(id=self.field + '1')

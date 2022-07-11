@@ -32,38 +32,24 @@ graphs = html.Div([
 		]),
 	]),
 	html.Div([
+		html.H2('Coordenadas paralelas'),
 		html.Div(children=[
 			sd_material_ui.Paper([
 				CoordenadasParalelas(dataset).get(app)
 			])
 		]),
+		html.H2('Caracterização geral'),
 		html.Div(children=[
 			sd_material_ui.Paper([
 				Histograma(dataset, 'IDADE', 'Idade').get(app),
 			]),
 		]),
+		html.H2('Pequenos múltiplus'),
 		html.Div(children=[
-			sd_material_ui.Paper([
-				PequenosMultiplos(dataset, 'IDADE', 'Idade').get(app),
-			])
-		]),
-		html.Div(children=[
-			sd_material_ui.Paper([
-				html.H3('Mapa'),
-				Mapa(dataset).get(app),
-			])
-		]),
-	]),
-	html.Div([
-		html.Div(children=[
-			sd_material_ui.Divider(),
-			html.H2('Pessoas responsáveis'),
-			sd_material_ui.Divider(),
-
-			sd_material_ui.Paper([
-				HistogramaResponsaveis(dataset).get(app),
+				sd_material_ui.Paper([
+					PequenosMultiplos(dataset, 'IDADE', 'Idade').get(app),
+				])
 			]),
-		]),
 	]),
 
 	html.Div([
@@ -78,6 +64,27 @@ graphs = html.Div([
 				]),
 			],
 			style={'flex': 1}),
+		]),
+	]),
+
+	html.Div([
+		html.Div(children=[
+			sd_material_ui.Divider(),
+			html.H2('Pessoas responsáveis'),
+			sd_material_ui.Divider(),
+
+			sd_material_ui.Paper([
+				HistogramaResponsaveis(dataset).get(app),
+			]),
+		]),
+	]),
+
+	html.Div([
+		html.Div(children=[
+			sd_material_ui.Paper([
+				html.H3('Mapa'),
+				Mapa(dataset).get(app),
+			])
 		]),
 	]),
 
