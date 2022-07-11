@@ -51,3 +51,8 @@ class Dataset:
 
 	def get_responsaveis(self):
 		return self.data[self.data['PARENTESCO_RF'] == 'PESSOA RESPONSAVEL PELA UNIDADE FAMILIAR RF']
+	
+	def get_auxilio(self):
+		com_auxilio_brasil = self.data.loc[self.data['AUXILIO_BRASIL']=="SIM"]
+		sem_auxilio_brasil = self.data.loc[self.data['AUXILIO_BRASIL']=="NAO"]
+		return com_auxilio_brasil, sem_auxilio_brasil

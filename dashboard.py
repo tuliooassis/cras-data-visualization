@@ -4,6 +4,7 @@ from CoordenadasParalelas import CoordenadasParalelas
 from PequenosMultiplos import PequenosMultiplos
 from Histograma import Histograma
 from HistogramaResponsaveis import HistogramaResponsaveis
+from HistogramaAuxilio import HistogramaAuxilio
 from Mapa import Mapa
 
 from Dataset import Dataset
@@ -70,6 +71,22 @@ graphs = html.Div([
 			html.Div(children=[
 				sd_material_ui.Paper([
 					HistogramaResponsaveis(dataset).get(app),
+				]),
+			],
+			style={'flex': 1}),
+		],
+			style={'width': '100%'}),
+	]),
+
+	html.Div([
+		html.Div(children=[
+			sd_material_ui.Divider(),
+			html.H2('Auxílio Brasil'),
+			sd_material_ui.Divider(),
+
+			html.Div(children=[
+				sd_material_ui.Paper([
+					HistogramaAuxilio(dataset).get(app),
 				]),
 			],
 			style={'flex': 1}),
