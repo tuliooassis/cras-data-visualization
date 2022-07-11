@@ -37,14 +37,10 @@ class PequenosMultiplos:
 		def update(date_index, column):
 			self.date = self.dataset.get_date_by_index(date_index)
 			
-			# fig = px.histogram(self.dataset.get_by_date(self.date), x=column)
-			# fig.update_layout(
-			# 	title_text='Distribuição de ' + self.label, # title of plot
-			# 	xaxis_title_text=self.label, # xaxis label
-			# 	yaxis_title_text='Quantidade' # yaxis label
-			# )
-
 			peopleCadUnico_hist = self.dataset.get_by_date(self.date)[['REGIONAL' , column, 'COR_RACA']]
+			peopleCadUnico_hist = peopleCadUnico_hist.drop(peopleCadUnico_hist[peopleCadUnico_hist['REGIONAL'].isin(['ENDERECO NAO GEORREFERENCIADO', 'Endereco FORA Region'])].index)
+
+
 			fig = px.histogram(peopleCadUnico_hist, facet_col="REGIONAL", color="COR_RACA", facet_col_wrap=3)
 			fig.update_layout(
 				title_text='Pequenos Múltiplos por Regional', # title of plot
