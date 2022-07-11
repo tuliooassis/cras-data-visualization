@@ -44,7 +44,7 @@ graphs = html.Div([
 				Histograma(dataset, 'IDADE', 'Idade').get(app),
 			]),
 		]),
-		html.H2('Pequenos múltiplus'),
+		html.H2('Pequenos múltiplos'),
 		html.Div(children=[
 				sd_material_ui.Paper([
 					PequenosMultiplos(dataset, 'IDADE', 'Idade').get(app),
