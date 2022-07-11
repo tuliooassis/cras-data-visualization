@@ -29,53 +29,41 @@ graphs = html.Div([
 				value=0,
 				marks={index: element for index, element in enumerate(dataset.get_available_dates())},
 			),
-		],
-			style={'width': '100%'}),
+		]),
 	]),
 	html.Div([
 		html.Div(children=[
 			sd_material_ui.Paper([
 				CoordenadasParalelas(dataset).get(app)
 			])
-		],
-			style={'flex': 3, 'flex-basis': '100%'}),
-
+		]),
 		html.Div(children=[
 			sd_material_ui.Paper([
 				Histograma(dataset, 'IDADE', 'Idade').get(app),
 			]),
-		],
-			style={'flex': 1}),
-
-
+		]),
 		html.Div(children=[
 			sd_material_ui.Paper([
 				PequenosMultiplos(dataset, 'IDADE', 'Idade').get(app),
 			])
-		], style={'flex': 1}),
-
-
+		]),
 		html.Div(children=[
 			sd_material_ui.Paper([
 				html.H3('Mapa'),
 				Mapa(dataset).get(app),
 			])
-		], style={'flex': 1}),
-	], style={'display': 'flex', 'flex-direction': 'row', 'flex-wrap': 'wrap'}),
+		]),
+	]),
 	html.Div([
 		html.Div(children=[
 			sd_material_ui.Divider(),
 			html.H2('Pessoas responsáveis'),
 			sd_material_ui.Divider(),
 
-			html.Div(children=[
-				sd_material_ui.Paper([
-					HistogramaResponsaveis(dataset).get(app),
-				]),
-			],
-			style={'flex': 1}),
-		],
-			style={'width': '100%'}),
+			sd_material_ui.Paper([
+				HistogramaResponsaveis(dataset).get(app),
+			]),
+		]),
 	]),
 
 	html.Div([
@@ -90,11 +78,10 @@ graphs = html.Div([
 				]),
 			],
 			style={'flex': 1}),
-		],
-			style={'width': '100%'}),
+		]),
 	]),
 
-])
+], style={'width': '100%'})
 
 app.layout = graphs
 
